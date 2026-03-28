@@ -1,0 +1,15 @@
+[meta]
+name="Test 2"
+id="test2"
+
+[[setting]]
+key=""
+label="Test String2"
+type="string"
+default=""
+
+[[setting]]
+key=""
+label="Well well well2"
+type="string"
+default=""
