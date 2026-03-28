@@ -1,17 +1,18 @@
 from dataclasses import dataclass
+from typing import Any
 import tomlkit
 
-from .widgets import SettingsWidgetType, SETTINGS_WIDGET_REGISTRY
+from .widgets import SETTINGS_WIDGET_REGISTRY
 
 class SettingsSchema:
-	"""Schemas describe the layout and parameters within a program's config file(s)."""
+	"""Schemas describe the layout and parameters of a program's config file(s)."""
 	def __init__(self):
 		self.name: str
 		self.id: str
 		self.description: str
 		self.reload_cmd: str
 		self.doc_url: str
-		self.files = []
+		self.files = {}
 		self.widgets = []
 
 	@classmethod
@@ -24,13 +25,16 @@ class SettingsSchema:
 			schema.build_widgets(doc)
 		return schema
 
+	def build_files(self, data):
+		for file in data["file"]:
+			pass
+
 	def build_widgets(self, data):
 		for entry in data["setting"]:
-			f = SettingsSchemaFileEntry(
-				"","",""
-			)
-			entry = SettingsSchemaSettingEntry(
-				f,
+			# f = SettingsSchemaFileEntry(
+			# 	"","",""
+			# )
+			entry = SettingsSchemaEntry(
 				entry["label"],
 				entry["key"],
 				SETTINGS_WIDGET_REGISTRY[entry["type"]],
@@ -47,21 +51,15 @@ class SettingsSchema:
 	def pull(self):
 		pass
 
-@dataclass
-class SettingsSchemaFileEntry:
-	id: str
-	adapter: str
-	path: str
+class SettingsSchemaEntry:
+	def __init__(self, label, key, type, properties):
+		self.label = label
+		self.key = key
+		self.type = type
+		self.properties = properties
+		self.cached_value = None
+		self.is_dirty = False
 
-@dataclass
-class SettingsSchemaSettingEntry:
-	file: SettingsSchemaFileEntry
-	label: str
-	key: str
-	type: SettingsWidgetType
-	properties: dict
-
-@dataclass
-class SettingsSchemaSectionEntry:
-	label: str
-	entries: list[SettingsSchemaSettingEntry]
+	def update(self, value):
+		self.cached_value = value
+		self.is_dirty = True
