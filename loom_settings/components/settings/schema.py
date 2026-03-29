@@ -20,8 +20,8 @@ class SettingsSchema:
 		with open(path, "r") as f:
 			doc = tomlkit.load(f)
 			schema = SettingsSchema()
-			schema.name = doc["meta"]["name"]
-			schema.id = doc["meta"]["id"]
+			schema.name = doc.value["meta"]["name"]
+			schema.id = doc.value["meta"]["id"]
 			schema.build_widgets(doc)
 		return schema
 

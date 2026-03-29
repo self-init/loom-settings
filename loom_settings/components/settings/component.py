@@ -1,4 +1,4 @@
-from ..base import BaseComponent
+from loom_settings.components.base import BaseComponent
 from .schema import SettingsSchema
 from pathlib import Path
 from importlib.resources import files
