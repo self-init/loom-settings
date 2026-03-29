@@ -4,6 +4,29 @@ This app works by taking in schemas that define the config file(s) of a programs
 The app then provides a UI to modify the config files based on the contents of the schema.
 Schemas are loaded dynamically allowing users to add support to their favorite programs.
 
+## Building and Running
+
+### Prerequisites
+
+- Python 3.14+
+- [uv](https://docs.astral.sh/uv/)
+
+### Installation
+
+Clone the repository and install in editable mode:
+```bash
+git clone https://github.com/self-init/loom-settings.git
+cd loom-settings
+uv pip install -e .
+```
+
+### Running
+
+This app requires the following environment variable to be set on Wayland:
+```bash
+__GLX_VENDOR_LIBRARY_NAME=mesa
+```
+
 ## Roadmap
 
 1. Implement MVP with 1/2 file formats and 1/2 schemas
