@@ -1,5 +1,5 @@
-from frontends.dearpygui.frontend import DearPyGuiFrontend
-from components import SettingsComponent
+from .frontends.dearpygui.frontend import DearPyGuiFrontend
+from .components import SettingsComponent
 
 class App:
 	def __init__(self, frontend):
@@ -13,4 +13,5 @@ class App:
 		dpgfrontend.register_component(sc)
 		dpgfrontend.run()
 
-App("").run()
+def main():
+	App("").run()

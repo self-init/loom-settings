@@ -1,0 +1,5 @@
+dearpygui>=2.2
+tomlkit>=0.14.0
+
+[dpg]
+dearpygui>=2.2
