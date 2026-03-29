@@ -1,6 +1,7 @@
 from ..base import BaseComponent
 from .schema import SettingsSchema
 from pathlib import Path
+from importlib.resources import files
 
 class SettingsComponent(BaseComponent):
 	id = "settings"
@@ -16,7 +17,7 @@ class SettingsComponent(BaseComponent):
 		pass
 
 	def scan_for_schemas(self):
-		dir=Path("/home/valerie/Documents/Code/loom-settings/loom/schemas")
+		dir = files("loom_settings") / "schemas"
 		schemas = []
 		for path in dir.iterdir():
 			if path.is_file():
